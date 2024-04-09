@@ -1,16 +1,16 @@
 package dmacc.repository;
-import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import dmacc.beans.Vehicle;
+import dmacc.beans.Appointment;
+
 /**
- * @author Phuoc Tran - ptran9@dmacc.edu
+ * @author chumb - djackson16
  * CIS175 - Spring 2024
- * Apr 8, 2024
+ * Apr 9, 2024
  */
+
 @Repository
-public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
-	
+public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 }

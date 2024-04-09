@@ -5,6 +5,8 @@ package dmacc.beans;
  * CIS175 - Spring 2024
  * Apr 2, 2024
  */
+
+
 public class Employee {
 
 }

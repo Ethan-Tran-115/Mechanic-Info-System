@@ -3,91 +3,149 @@ package dmacc.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
+import dmacc.beans.Appointment;
 import dmacc.beans.Customer;
 import dmacc.beans.Vehicle;
+import dmacc.repository.AppointmentRepository;
 import dmacc.repository.CustomerRepository;
 import dmacc.repository.VehicleRepository;
 
 /**
- * @author Phuoc Tran - ptran9@dmacc.edu
- * CIS175 - Spring 2024
- * Apr 9, 2024
+ * @author Phuoc Tran - ptran9@dmacc.edu CIS175 - Spring 2024 Apr 9, 2024
  */
 
-@RestController
+@Controller
 public class WebController {
 	@Autowired
-    private CustomerRepository customerRepository;
+	private CustomerRepository customerRepository;
 
-    @Autowired
-    private VehicleRepository vehicleRepository;
+	@Autowired
+	private VehicleRepository vehicleRepository;
+	
+	@Autowired
+	private AppointmentRepository appointmentRepository;
 
-    //Adds a new customer
-    @PostMapping("/addCustomer")
-    public void addCustomer(@RequestBody Customer customer) {
-        customerRepository.save(customer);
-    }
+	@GetMapping("/viewAllCustomers")
+	public String viewAllCustomers(Model model) {
+		if (customerRepository.findAll().isEmpty()) {
+			return addNewCustomer(model);
+		}
+		model.addAttribute("customer", customerRepository.findAll());
+		return "results";
+	}
 
-    //Delete a customer by ID
-    @DeleteMapping("/deleteCustomer")
-    public void deleteCustomer(@RequestParam Long customerId) {
-        customerRepository.deleteById(customerId);
-    }
+	@GetMapping("/inputCustomer")
+	public String addNewCustomer(Model model) {
+		Customer c = new Customer();
+		model.addAttribute("newCustomer", c);
+		return "input";
+	}
 
-    //Add a new vehicle
-    @PostMapping("/addNewVehicle")
-    public void addNewVehicle(@RequestBody Vehicle vehicle) {
-        vehicleRepository.save(vehicle);
-    }
-    
-    //Add a vehicle to a customer
-    @PostMapping("/addVehicle")
-    public void addVehicle(@RequestParam Long customerId, @RequestBody Vehicle vehicle) {
-        Customer customer = customerRepository.findById(customerId).orElse(null);
-        if (customer != null) {
-            vehicle.setCustomer(customer);
-            vehicleRepository.save(vehicle);
-        }
-    }
+	@PostMapping("/inputCustomer")
+	public String addNewCustomer(@ModelAttribute Customer c, Model model) {
+		customerRepository.save(c);
+		return viewAllCustomers(model);
+	}
 
-    //Deletes a vehicle by ID
-    @DeleteMapping("/deleteVehicle")
-    public void deleteVehicle(@RequestParam int vehicleId) {
-        vehicleRepository.deleteById(vehicleId);
-    }
+	@GetMapping("/edit/{id}")
+	public String showUpdateCustomer(@PathVariable("id") long id, Model model) {
+		Customer c = customerRepository.findById(id).orElse(null);
+		model.addAttribute("newCustomer", c);
+		return "input";
+	}
 
-    //Searches for customers by first name or last name.
-    @GetMapping("/searchCustomersByName")
-    public List<Customer> searchCustomersByName(@RequestParam String name) {
-        return customerRepository.findByFNameContainingIgnoreCaseOrLNameContainingIgnoreCase(name, name);
-    }
+	@PostMapping("/update/{id}")
+	public String reviseCustomer(Customer c, Model model) {
+		customerRepository.save(c);
+		return viewAllCustomers(model);
+	}
 
-    
-    //Searches for vehicles by make, model, and year.
-    @GetMapping("/searchVehicles")
-    public List<Vehicle> searchVehicles(@RequestParam String make, @RequestParam String model,
-                                        @RequestParam String year) {
-        return vehicleRepository.findByMakeAndModelAndYear(make, model, year);
-    }
+	@GetMapping("/delete/{id}")
+	public String deleteCustomer(@PathVariable("id") long id, Model model) {
+		Customer c = customerRepository.findById(id).orElse(null);
+		customerRepository.delete(c);
+		return viewAllCustomers(model);
+	}
+	
+	@GetMapping("/inputVehicle")
+	public String addNewVehicle(Model model) {
+		Vehicle v = new Vehicle();
+		model.addAttribute("newVehicle", v);
+		return "input";
+	}
 
-    
-    //Updates a vehicle's details.
-    @PutMapping("/updateVehicle")
-    public void updateVehicle(@RequestParam int vehicleId, @RequestBody Vehicle vehicle) {
-        Vehicle existingVehicle = vehicleRepository.findById(vehicleId).orElse(null);
-        if (existingVehicle != null) {
-            existingVehicle.setMake(vehicle.getMake());
-            existingVehicle.setModel(vehicle.getModel());
-            existingVehicle.setYear(vehicle.getYear());
-            vehicleRepository.save(existingVehicle);
-        }
-    }
+	@PostMapping("/inputVehicle")
+	public String addNewVehicle(@ModelAttribute Vehicle v, Model model) {
+		vehicleRepository.save(v);
+		return viewAllCustomers(model);
+	}
+
+	@GetMapping("/edit/{id}")
+	public String showUpdateVehicle(@PathVariable("id") long id, Model model) {
+		Vehicle v = vehicleRepository.findById(id).orElse(null);
+		model.addAttribute("newVehicle", v);
+		return "input";
+	}
+
+	@PostMapping("/update/{id}")
+	public String reviseVehicle(Vehicle v, Model model) {
+		vehicleRepository.save(v);
+		return viewAllCustomers(model);
+	}
+
+	@GetMapping("/delete/{id}")
+	public String deleteVehicle(@PathVariable("id") long id, Model model) {
+		Vehicle v = vehicleRepository.findById(id).orElse(null);
+		vehicleRepository.delete(v);
+		return viewAllCustomers(model);
+	}
+	
+	@GetMapping("/viewAllAppointments")
+	public String viewAllAppointments(Model model) {
+		if (customerRepository.findAll().isEmpty()) {
+			return addNewCustomer(model);
+		}
+		model.addAttribute("customer", customerRepository.findAll());
+		return "results";
+	}
+
+	@GetMapping("/inputCustomer")
+	public String addNewAppointment(Model model) {
+		Appointment a = new Appointment();
+		model.addAttribute("newCustomer", a);
+		return "input";
+	}
+
+	@PostMapping("/inputAppointment")
+	public String addNewAppointment(@ModelAttribute Appointment a, Model model) {
+		appointmentRepository.save(a);
+		return viewAllAppointments(model);
+	}
+
+	@GetMapping("/edit/{id}")
+	public String showUpdateAppointment(@PathVariable("id") long id, Model model) {
+		Appointment a = appointmentRepository.findById(id).orElse(null);
+		model.addAttribute("newAppointment", a);
+		return "input";
+	}
+
+	@PostMapping("/update/{id}")
+	public String reviseAppointment(Appointment a, Model model) {
+		appointmentRepository.save(a);
+		return viewAllAppointments(model);
+	}
+
+	@GetMapping("/delete/{id}")
+	public String deleteAppointment(@PathVariable("id") long id, Model model) {
+		Appointment a = appointmentRepository.findById(id).orElse(null);
+		appointmentRepository.delete(a);
+		return viewAllAppointments(model);
+	}
 }
