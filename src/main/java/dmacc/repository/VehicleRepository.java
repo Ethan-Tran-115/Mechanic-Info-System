@@ -1,4 +1,6 @@
 package dmacc.repository;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import dmacc.beans.Vehicle;
@@ -8,5 +10,5 @@ import dmacc.beans.Vehicle;
  * Apr 8, 2024
  */
 public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
-
+	List<Vehicle> findByMakeAndModelAndYear(String make, String model, String year);
 }

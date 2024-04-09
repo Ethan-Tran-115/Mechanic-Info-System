@@ -26,11 +26,15 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-	private String name;
+	private String fName;
+	
+	private String lName;
     
     private String email;
     
     private String phoneNum;
+    
+    private String creditCardNum;
     
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Vehicle> vehicles = new ArrayList<>();
