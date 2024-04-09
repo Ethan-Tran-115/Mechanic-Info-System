@@ -11,23 +11,23 @@
 	<div class="innerContent">
 	<form>
 		<table>
-			<tr th:each="">
+			<tr th:each="currentCustomer : ${customer}">
                 <!-- First Name  -->
-				<td th:text="${}"></td>
+				<td th:text="${currentCustomer.fName} "></td>
                 <!-- Last Name -->
-				<td th:text="${}"></td>
+				<td th:text="${currentCustomer.lName}"></td>
                 <!-- Email Address -->
-				<td th:text="${}"></td>
+				<td th:text="${currentCustomer.email}"></td>
                 <!-- Phone Number-->
-				<td th:text="${}"></td>
+				<td th:text="${currentCustomer.phoneNum}"></td>
                 <!-- Vehicle Make -->
-				<td th:text="${}"></td>
+				<td th:text="${currentCustomer.vehicle.make}"></td>
                 <!-- Vehicle Model -->
-				<td th:text="${}"></td>
+				<td th:text="${currentCustomer.vehicle.model}"></td>
                 <!-- Vehicle Year-->
-                <td th:text="${}"></td>
+                <td th:text="${currentCustomer.vehicle.year}"></td>
                 <!-- Vehicle Color-->
-                <td th:text="${}"></td>
+                <td th:text="${currentCustomer.vehicle.color}"></td>
 			</tr>
 		</table>
 		<input type="submit" value="Edit">
