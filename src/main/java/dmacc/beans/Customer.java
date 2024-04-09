@@ -38,4 +38,9 @@ public class Customer {
     
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Vehicle> vehicles = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Appointment> Appointment = new ArrayList<>();
+    
+    
 }
