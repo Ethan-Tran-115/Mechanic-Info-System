@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- <html xmlns:th="//http:www.thymeleaf.org"> -->
+<head>
+<meta charset="UTF-8">
+<title>Update Customer</title>
+<link rel="stylesheet" href="../static/stylesheet.css">
+<!-- <style>
+    .center {
+        text-align: center;
+    }
+    input[type="text"]{
+        width: 200px;
+        margin: 5px;
+        
+    }
+    label{
+        display: inline-block;
+        margin-bottom: 5px;
+        text-align: right;
+        width: 125px;
+    }
+    h2, h3{
+        text-decoration: underline;
+    }
+    body {
+        background-color: lightgray; 
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
+    .content {
+        background-color: whitesmoke;
+        padding: 20px;
+        margin: 7px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px darkslategrey;
+    }
+    .innerContent {
+        background-color: whitesmoke;
+        box-shadow: 0 0 10px gray;
+        border-radius: 10px;
+        margin: 7px;
+        padding: 10px;
+    }
+    .notes {
+        height: 60px;
+        width: 200px;
+        border-radius: 5px;
+    }
+</style> -->
+</head>
+<body>
+    <div class="content">
+        <h2 class="center">Updating Existing Customer</h2>
+        <form th:object="" th:action="@{}" method='post'>
+            <div class="innerContent">
+                <h3 class="center">Customer Information</h3>
+                <div class="center">
+                    <label for="">First Name: </label> <input type="text" name="" th:field="*{}">
+                </div>	
+                <div class="center">
+                    <label for="">Last Name: </label> <input type="text" name="" th:field="*{}">
+                </div>
+                <div class="center">
+                    <label for="">Email Address: </label> <input type="text" name="" th:field="*{}">
+                </div>
+                <div class="center">
+                    <label for="">Phone Number: </label> <input type="text" name="" th:field="*{}">
+                </div>
+
+                <h3 class="center">Vehicle Information</h3>
+                <div class="center">
+                    <label for="">Make: </label> <input type="text" name="" th:field="*{}">
+                </div>
+                <div class="center">
+                    <label for="">Model: </label> <input type="text" name="" th:field="*{}">
+                </div>
+                <div class="center">
+                    <label for="">Year: </label> <input type="text" name="" th:field="*{}">
+                </div>
+                <div class="center">
+                    <label for="">Color: </label> <input type="text" name="" th:field="*{}">
+                </div>
+                <div class="center">
+                    <label for="">Vehicle Notes: </label> <textarea class="notes" placeholder="Enter Vehicle Notes Here"></textarea>
+                </div>
+                <div class="center">
+                    <br/>
+                    <input name="submit" type="submit" value="Submit"/>
+                </div>
+            </div>
+	    </form>
+        <div class="center">
+            <a href="../static/index.html" class="button">Back To Home</a>
+            <a href="addCustomer.html" class="button">Add New Customer</a>
+            <a href="index.html" class="button">View All Customers</a><br>
+        </div>
+    </div>
+</body>
+</html>
