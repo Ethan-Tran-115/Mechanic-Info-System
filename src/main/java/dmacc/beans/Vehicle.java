@@ -29,6 +29,8 @@ public class Vehicle {
 	
 	private String year;
 	
+	private String color;
+	
 	@ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
