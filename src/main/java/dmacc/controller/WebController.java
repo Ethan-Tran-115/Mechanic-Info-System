@@ -18,7 +18,9 @@ import dmacc.repository.CustomerRepository;
 import dmacc.repository.VehicleRepository;
 
 /**
- * @author Phuoc Tran - ptran9@dmacc.edu CIS175 - Spring 2024 Apr 9, 2024
+ * @author chumb - djackson16
+ * CIS175 - Spring 2024
+ * Apr 2, 2024
  */
 
 @Controller
