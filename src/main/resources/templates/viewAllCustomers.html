@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <title>View All Customers</title>
 <link rel="stylesheet" href="../static/stylesheet.css">
+<title>View All Customers</title>
+<link rel="stylesheet" href="/stylesheet.css">
+<style>
+	label {
+    	display: inline-block;
+    	white-space: nowrap;
+    	text-align: center;
+  }
+</style>
 </head>
 <body class="center">
     <div class="content">
@@ -11,23 +20,13 @@
 	<div class="innerContent">
 	<form>
 		<table>
-			<tr th:each="currentCustomer : ${customer}">
-                <!-- First Name  -->
-				<td th:text="${currentCustomer.fName} "></td>
-                <!-- Last Name -->
-				<td th:text="${currentCustomer.lName}"></td>
-                <!-- Email Address -->
-				<td th:text="${currentCustomer.email}"></td>
-                <!-- Phone Number-->
-				<td th:text="${currentCustomer.phoneNum}"></td>
-                <!-- Vehicle Make -->
-				<td th:text="${currentCustomer.vehicle.make}"></td>
-                <!-- Vehicle Model -->
-				<td th:text="${currentCustomer.vehicle.model}"></td>
-                <!-- Vehicle Year-->
-                <td th:text="${currentCustomer.vehicle.year}"></td>
-                <!-- Vehicle Color-->
-                <td th:text="${currentCustomer.vehicle.color}"></td>
+			<tr th:each="currentCustomer, iterStat : ${customer}">
+				
+				<td>
+					<input type="radio" name="selectedCustomer" id="customer${iterStat.index}">
+					<label for="customer${iterStat.index}" th:text="${currentCustomer.fName} + ' ' + ${currentCustomer.lName} + ',
+					 Email: ' + ${currentCustomer.email} + ', Phone: ' + ${currentCustomer.phoneNum} + ', CC: ' + ${currentCustomer.creditCardNum}"></label>
+                </td>
 			</tr>
 		</table>
 		<input type="submit" value="Edit">
@@ -35,8 +34,8 @@
 	</form>
 	</div>
 	<div class="center">
-		<a href="../static/index.html" class="button">Back To Home</a>
-		<a href="addCustomer.html" class="button">Add New Customer</a><br>
+		<a href="/index.html" class="button">Back To Home</a>
+		<a href="inputCustomer" class="button">Add New Customer</a><br>
 	</div>
     </div>
 </body>

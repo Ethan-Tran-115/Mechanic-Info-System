@@ -40,14 +40,14 @@ public class WebController {
 			return addNewCustomer(model);
 		}
 		model.addAttribute("customer", customerRepository.findAll());
-		return "results";
+		return "viewAllCustomers";
 	}
 
 	@GetMapping("/inputCustomer")
 	public String addNewCustomer(Model model) {
 		Customer c = new Customer();
 		model.addAttribute("newCustomer", c);
-		return "input";
+		return "addCustomer";
 	}
 
 	@PostMapping("/inputCustomer")
@@ -59,8 +59,8 @@ public class WebController {
 	@GetMapping("/editCustomer/{id}")
 	public String showUpdateCustomer(@PathVariable("id") long id, Model model) {
 		Customer c = customerRepository.findById(id).orElse(null);
-		model.addAttribute("newCustomer", c);
-		return "input";
+		model.addAttribute("updateCustomer", c);
+		return "updateCustomer";
 	}
 
 	@PostMapping("/updateCustomer/{id}")
@@ -111,18 +111,18 @@ public class WebController {
 	
 	@GetMapping("/viewAllAppointments")
 	public String viewAllAppointments(Model model) {
-		if (customerRepository.findAll().isEmpty()) {
-			return addNewCustomer(model);
+		if (appointmentRepository.findAll().isEmpty()) {
+			return addNewAppointment(model);
 		}
-		model.addAttribute("customer", customerRepository.findAll());
+		model.addAttribute("appointment", customerRepository.findAll());
 		return "results";
 	}
 
 	@GetMapping("/inputAppointment")
 	public String addNewAppointment(Model model) {
 		Appointment a = new Appointment();
-		model.addAttribute("newCustomer", a);
-		return "input";
+		model.addAttribute("newAppointment", a);
+		return "createAppointment";
 	}
 
 	@PostMapping("/inputAppointment")
