@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>View All Appointments</title>
+<link rel="stylesheet" href="../static/stylesheet.css">
+</head>
+<body class="center">
+	<div class="content">
+	<h2>List of Appointments</h2>
+	<div class="innerContent">
+	<form>
+		<table>
+			<tr th:each="currentAppointment : ${appointment}">
+				<!-- Appointment ID -->
+				<td th:text="${currentAppointment.id}"></td>
+				<!-- Appointment Date -->
+				<td th:text="${currentAppointment.date}"></td>
+				<!-- Description -->
+				<td th:text="${currentAppointment.description}"></td>
+				<!-- Customer Name -->
+				<td th:text="${currentAppointment.customer.fName + ' ' + currentAppointment.customer.lName}"></td>  
+				<td><a th:href= "@{/editAppointment/{id}(id=${currentAppointment.id})}">Edit</a></td>
+				<td><a th:href="@{/deleteAppointment/{id}(id=${currentAppointment.id})}">Delete</a></td>
+			</tr>
+		</table>		 
+	</form>
+	</div>
+	<div class="center">
+		<a href="../static/index.html" class="button">Back To Home</a>
+		<a href="addAppointment.html" class="button">Add New Appointment</a><br>
+	</div>
+    </div>
+</body>
+</html>
