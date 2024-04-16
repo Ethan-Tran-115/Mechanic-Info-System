@@ -7,36 +7,51 @@
 <title>View All Customers</title>
 <link rel="stylesheet" href="/stylesheet.css">
 <style>
-	label {
-    	display: inline-block;
-    	white-space: nowrap;
-    	text-align: center;
-  }
+label {
+	display: inline-block;
+	white-space: nowrap;
+	text-align: center;
+}
 </style>
+
 </head>
 <body class="center">
-    <div class="content">
-	<h2>List of Customers</h2>
-	<div class="innerContent">
-	<form>
-		<table>
-			<tr th:each="currentCustomer, iterStat : ${customer}">
-				
-				<td>
-					<input type="radio" name="selectedCustomer" id="customer${iterStat.index}">
-					<label for="customer${iterStat.index}" th:text="${currentCustomer.fName} + ' ' + ${currentCustomer.lName} + ',
-					 Email: ' + ${currentCustomer.email} + ', Phone: ' + ${currentCustomer.phoneNum} + ', CC: ' + ${currentCustomer.creditCardNum}"></label>
-                </td>
-			</tr>
-		</table>
-		<input type="submit" value="Edit">
-		<input type="submit" value="Delete">
-	</form>
+	<div class="content">
+		<h2>List of Customers</h2>
+		<div class="innerContent">
+			<form>
+				<table>
+					<tr th:each="currentCustomer, iterStat : ${customers}">
+						<td
+							th:text="${currentCustomer.fName} + ' ' + ${currentCustomer.lName} + ', Email: ' + ${currentCustomer.email} + ', Phone: ' + ${currentCustomer.phoneNum} + ', CC: ' + ${currentCustomer.creditCardNum}"></td>
+						<!-- Couldn't get radio to work
+					<input type="radio" name="selectedCustomer" id="customer${iterStat.index}" value="${currentCustomer.id}">
+					<label for="customer${iterStat.index}" 
+					-->
+						<td th:each="vehicle : ${customerVehicles}"
+							th:text="${vehicle.make} + ' ' + ${vehicle.model} + ' ' + ${vehicle.year} + ' ' + ${vehicle.color}"></td>
+
+						<td><a
+							th:href="@{/viewSpecificCustomer/{id}(id=${currentCustomer.id})}">View</a></td>
+						<td><a
+							th:href="@{/editCustomer/{id}(id=${currentCustomer.id})}">Edit</a></td>
+						<td><a
+							th:href="@{/deleteCustomer/{id}(id=${currentCustomer.id})}">Delete</a></td>
+
+
+
+					</tr>
+				</table>
+				<!-- Attempt at radio buttons - couldn't get value from selected radio
+		<input type="submit" value="Edit" th:formaction="@{/editCustomer/{id}(id=selectedCustomer.value)}">
+		<input type="submit" value="Delete" th:formaction="@{/deleteCustomer/{id}(id=selectedCustomer.value)}">
+		-->
+			</form>
+		</div>
+		<div class="center">
+			<a href="/index.html" class="button">Back To Home</a> <a
+				href="inputCustomer" class="button">Add New Customer</a><br>
+		</div>
 	</div>
-	<div class="center">
-		<a href="/index.html" class="button">Back To Home</a>
-		<a href="inputCustomer" class="button">Add New Customer</a><br>
-	</div>
-    </div>
 </body>
 </html>
