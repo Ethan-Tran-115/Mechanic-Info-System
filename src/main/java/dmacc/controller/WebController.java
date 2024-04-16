@@ -140,11 +140,14 @@ public class WebController {
 	public String addNewAppointment(Model model) {
 		Appointment a = new Appointment();
 		model.addAttribute("newAppointment", a);
+		model.addAttribute("customers", customerRepository.findAll());
 		return "createAppointment";
 	}
 
 	@PostMapping("/inputAppointment")
 	public String addNewAppointment(@ModelAttribute Appointment a, Model model) {
+		Customer selectedCustomer = customerRepository.findById(a.getCustomer().getId()).orElse(null);
+	    a.setCustomer(selectedCustomer);
 		appointmentRepository.save(a);
 		return viewAllAppointments(model);
 	}
