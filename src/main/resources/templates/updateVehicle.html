@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Update Vehicle</title>
+<link rel="stylesheet" href="/stylesheet.css">
+<style>
+	.hidden{
+		display: none;
+	}
+</style>
+</head>
+<!--Issue with, when updating either customer or vehicle, vehicle will not show up on the viewAllCustomers page, 
+	will show if you click the "view all customers" button-->
+<body>
+	<div class="content">
+		<h2 class="center">Updating Customer Vehicle Information</h2>
+		<form th:object="${updateVehicle}" th:action="@{/updateVehicle/{id}(id=${updateVehicle.id})}" method='post'>
+			<div class="innerContent">
+				<h3 class="center">Vehicle Information</h3>
+				<div th:object="${updateVehicle}">
+					<div class="hidden">
+						<input type="text" name="customer.id" th:field="*{customer.id}">
+						<input type="text" name="customer.fName" th:field="*{customer.fName}">
+						<input type="text" name="customer.lName" th:field="*{customer.lName}">
+						<input type="text" name="customer.phoneNum" th:field="*{customer.phoneNum}">
+						<input type="text" name="customer.email" th:field="*{customer.email}">
+						<input type="text" name="customer.creditCardNum" th:field="*{customer.creditCardNum}">
+					</div>
+					<div class="center">
+						<label for="make">Make: </label> <input type="text"
+							name="make" th:field="*{make}">
+					</div>
+					<div class="center">
+						<label for="model">Model: </label> <input type="text"
+							name="model" th:field="*{model}">
+					</div>
+					<div class="center">
+						<label for="year">Year: </label> <input type="text"
+							name="year" th:field="*{year}">
+					</div>
+					<div class="center">
+						<label for="color">Color: </label> <input type="text"
+							name="color" th:field="*{color}">
+					</div>
+					<div class="center">
+						<br /> <input name="submit" type="submit" value="Submit" />
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="center">
+			<a href="/index.html" class="button">Back To Home</a> <a
+				href="updateCustomer.html" class="button">Update Customer</a> <a
+				href="viewAllCustomers" class="button">View All Customers</a><br>
+		</div>
+	</div>
+</body>
+</html>
