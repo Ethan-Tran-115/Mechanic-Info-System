@@ -20,9 +20,11 @@ label {
 			<h3>Customer Information</h3>
 			<div
 				th:text="${customer.fName} + ' ' + ${customer.lName} + ', Email: ' + ${customer.email} + ', Phone: ' + ${customer.phoneNum} + ', CC: ' + ${customer.creditCardNum}"></div>
+				
 			<h3>Vehicle Information</h3>
 			<div th:each="vehicle : ${customerVehicles}"
 				th:text="${vehicle.make} + ' ' + ${vehicle.model} + ' ' + ${vehicle.year} + ' ' + ${vehicle.color}"></div>
+				
 			<h3>Appointments</h3>
 			<div th:each="appointment : ${customerAppointments}"
 				th:text="${appointment.description} + ' ' + ${appointment.date}"></div>
