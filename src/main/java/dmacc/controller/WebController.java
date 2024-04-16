@@ -1,5 +1,6 @@
 package dmacc.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,19 +40,36 @@ public class WebController {
 		if (customerRepository.findAll().isEmpty()) {
 			return addNewCustomer(model);
 		}
-		model.addAttribute("customer", customerRepository.findAll());
+		model.addAttribute("customers", customerRepository.findAll());
 		return "viewAllCustomers";
+	}
+	
+	@GetMapping("/viewSpecificCustomer/{id}")
+	public String viewCustomerVehicles(@PathVariable("id") long id, Model model) {
+		Customer c = customerRepository.findById(id).orElse(null);
+		List<Vehicle> customerVehicles = vehicleRepository.findAllByCustomerId(id);
+		List<Appointment> customerAppointments = appointmentRepository.findAllByCustomerId(id);
+		model.addAttribute("customer", c);
+		model.addAttribute("customerVehicles", customerVehicles);
+		model.addAttribute("customerAppointments", customerAppointments);
+		return "viewSpecificCustomer";
 	}
 
 	@GetMapping("/inputCustomer")
 	public String addNewCustomer(Model model) {
 		Customer c = new Customer();
+		Vehicle v = new Vehicle();
 		model.addAttribute("newCustomer", c);
+		model.addAttribute("newVehicle", v);
 		return "addCustomer";
 	}
 
 	@PostMapping("/inputCustomer")
-	public String addNewCustomer(@ModelAttribute Customer c, Model model) {
+	public String addNewCustomer(@ModelAttribute Customer c,@ModelAttribute Vehicle v, Model model) {
+		v.setCustomer(c);
+		List<Vehicle> tempVehicles = new ArrayList<>();
+		tempVehicles.add(v);
+		c.setVehicles(tempVehicles);
 		customerRepository.save(c);
 		return viewAllCustomers(model);
 	}

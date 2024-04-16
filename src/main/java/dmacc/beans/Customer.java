@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,9 +37,9 @@ public class Customer {
     
     private String creditCardNum;
     
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Vehicle> vehicles = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Vehicle> vehicles;
     
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Appointment> Appointment = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<Appointment> appointments;
 }
