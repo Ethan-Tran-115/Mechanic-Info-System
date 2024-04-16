@@ -19,7 +19,6 @@
 				<!-- Description -->
 				<td th:text="${currentAppointment.description}"></td>
 				<!-- Customer Name -->
-				<td th:text="${currentAppointment.customer.fName + ' ' + currentAppointment.customer.lName}"></td>  
 				<td><a th:href= "@{/editAppointment/{id}(id=${currentAppointment.id})}">Edit</a></td>
 				<td><a th:href="@{/deleteAppointment/{id}(id=${currentAppointment.id})}">Delete</a></td>
 			</tr>
