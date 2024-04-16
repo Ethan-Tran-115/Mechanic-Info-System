@@ -114,8 +114,8 @@ public class WebController {
 		if (appointmentRepository.findAll().isEmpty()) {
 			return addNewAppointment(model);
 		}
-		model.addAttribute("appointment", customerRepository.findAll());
-		return "results";
+		model.addAttribute("appointment", appointmentRepository.findAll());
+		return "viewAllAppointments";
 	}
 
 	@GetMapping("/inputAppointment")
