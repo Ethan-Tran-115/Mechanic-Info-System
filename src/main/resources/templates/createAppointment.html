@@ -4,15 +4,38 @@
 <meta charset="UTF-8">
 <title>Create Appointment</title>
 <link rel="stylesheet" href="/stylesheet.css">
+<script>
+	function validateForm() { 
+		var date = document.appointmentForm.date.value;
+        var description = document.appointmentForm.description.value;
+        var customer = document.appointmentForm.customer.value;
 
+        if (date === "") {
+            alert("Please select an appointment date.");
+            return false;
+        }
+
+        if (description === "") {
+            alert("Please enter a description.");
+            return false;
+        }
+
+        if (customer === "") {
+            alert("Please select a customer.");
+            return false;
+        }
+
+        return true;
+	}
+</script>
 </head>
 <body>
     <div class="content">
         <h2 class="center">Creating Appointment</h2>
-        <form th:object="${newAppointment}" th:action="@{/inputAppointment}" method='post'>
+        <form th:object="${newAppointment}" th:action="@{/inputAppointment}" method="post" name="appointmentForm" onsubmit="return validateForm()">
             <div class="innerContent">
                 <div class="center">
-                    <label for="">Appointment Date: </label> <input type="date" name="" th:field="*{date}">
+                    <label for="">Appointment Date: </label> <input type="date" name="date" th:field="*{date}">
                 </div>	
                 <div class="center">
                     <label for="">Description of Service Needed: </label> <textarea class="notes" name="description" th:field="*{description}"></textarea>
