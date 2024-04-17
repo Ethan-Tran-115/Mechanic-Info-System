@@ -84,7 +84,7 @@ public class WebController {
 	@PostMapping("/updateCustomer/{id}")
 	public String reviseCustomer(Customer c, Model model) {
 		customerRepository.save(c);
-		return viewAllCustomers(model);
+		return "viewAllCustomers";
 	}
 
 	@GetMapping("/deleteCustomer/{id}")
@@ -117,7 +117,8 @@ public class WebController {
 	@PostMapping("/updateVehicle/{id}")
 	public String reviseVehicle(Vehicle v, Model model) {
 		vehicleRepository.save(v);
-		return viewAllCustomers(model);
+		Long custId = v.getCustomer().getId();
+		return "redirect:/index.html";
 	}
 
 	@GetMapping("/deleteVehicle/{id}")
