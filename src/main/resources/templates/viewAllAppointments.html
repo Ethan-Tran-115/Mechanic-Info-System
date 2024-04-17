@@ -16,6 +16,7 @@
 				<td th:text="'ID: ' + ${currentAppointment.id} + ' | Date: ' + ${currentAppointment.date} + ' | Description: ' + ${currentAppointment.description} + ' | Customer: '"></td>
 				
 				<td th:text="${currentAppointment.customer?.fName ?: ''} + ' ' + ${currentAppointment.customer?.lName ?: ''}"></td>  
+
 				<td><a th:href= "@{/editAppointment/{id}(id=${currentAppointment.id})}">Edit</a></td>
 				<td><a th:href="@{/deleteAppointment/{id}(id=${currentAppointment.id})}">Delete</a></td>
 			</tr>
