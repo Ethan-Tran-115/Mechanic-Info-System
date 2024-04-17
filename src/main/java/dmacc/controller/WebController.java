@@ -110,8 +110,8 @@ public class WebController {
 	@GetMapping("/editVehicle/{id}")
 	public String showUpdateVehicle(@PathVariable("id") long id, Model model) {
 		Vehicle v = vehicleRepository.findById(id).orElse(null);
-		model.addAttribute("newVehicle", v);
-		return "input";
+		model.addAttribute("updateVehicle", v);
+		return "updateVehicle";
 	}
 
 	@PostMapping("/updateVehicle/{id}")
