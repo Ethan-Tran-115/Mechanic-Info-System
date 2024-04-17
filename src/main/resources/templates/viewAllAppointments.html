@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>View All Appointments</title>
-<link rel="stylesheet" href="../static/stylesheet.css">
+<link rel="stylesheet" href="/stylesheet.css">
 </head>
 <body class="center">
 	<div class="content">
@@ -12,13 +12,9 @@
 	<form>
 		<table>
 			<tr th:each="currentAppointment : ${appointment}">
-				<!-- Appointment ID -->
-				<td th:text="${currentAppointment.id}"></td>
-				<!-- Appointment Date -->
-				<td th:text="${currentAppointment.date}"></td>
-				<!-- Description -->
-				<td th:text="${currentAppointment.description}"></td>
-				<!-- Customer Name -->
+				
+				<td th:text="'ID: ' + ${currentAppointment.id} + ' | Date: ' + ${currentAppointment.date} + ' | Description: ' + ${currentAppointment.description} + ' | Customer: '"></td>
+				
 				<td th:text="${currentAppointment.customer?.fName ?: ''} + ' ' + ${currentAppointment.customer?.lName ?: ''}"></td>  
 				<td><a th:href= "@{/editAppointment/{id}(id=${currentAppointment.id})}">Edit</a></td>
 				<td><a th:href="@{/deleteAppointment/{id}(id=${currentAppointment.id})}">Delete</a></td>

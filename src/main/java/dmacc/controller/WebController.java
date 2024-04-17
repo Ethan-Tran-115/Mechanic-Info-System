@@ -156,7 +156,7 @@ public class WebController {
 	public String showUpdateAppointment(@PathVariable("id") long id, Model model) {
 		Appointment a = appointmentRepository.findById(id).orElse(null);
 		model.addAttribute("newAppointment", a);
-		return "input";
+		return "updateAppointment";
 	}
 
 	@PostMapping("/updateAppointment/{id}")
