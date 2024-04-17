@@ -11,8 +11,8 @@
 </style>
 <script>
 	function validateForm() {
-		var date = document.forms["appointmentForm"]["date"].value;
-        var description = document.forms["appointmentForm"]["description"].value;
+		var date = document.appointmentForm.date.value;
+        var description = document.appointmentForm.description.value;
 
         if (date === "") {
             alert("Please select an appointment date.");
