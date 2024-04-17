@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- <html xmlns:th="//http:www.thymeleaf.org"> -->
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Create Appointment</title>
@@ -16,6 +16,13 @@
                 </div>	
                 <div class="center">
                     <label for="">Description of Service Needed: </label> <textarea class="notes" name="description" th:field="*{description}"></textarea>
+                </div>
+                <div class="center">
+                    <label for="customer">Select Customer: </label>
+                    <select id="customer" name="customer" th:field="*{customer}">
+                        <option value="">Select a customer</option>
+                        <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.fName + ' ' + customer.lName}"></option>
+                    </select>
                 </div>
                 <div class="center">
                     <button type="submit">Create Appointment</button>
