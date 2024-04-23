@@ -73,9 +73,12 @@
 						<a class="sm_button" th:href="@{/editVehicle/{id}(id=${vehicle.id})}">Edit</a>
 						<a class="sm_button" th:href="@{/deleteVehicle/{id}(id=${vehicle.id})}">Delete</a>
 					</div>
+					<div>
+						<a></a>
+					</div>
 				 </div>
 				 
-				  <h3 class="center">Vehicle Information</h3>
+				  <h3 class="center">Appointment Information</h3>
                 <div th:each="appointment : ${updateCustomer.appointments}">
 					<div class="center">
 						<p th:text="'Appointment ' + ${updateCustomer.appointments.indexOf(appointment) + 1} + ': ' + ${appointment.date}+ ', ' + ${appointment.description}"></p>

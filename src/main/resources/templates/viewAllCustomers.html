@@ -10,6 +10,17 @@ label {
 	white-space: nowrap;
 	text-align: center;
 }
+tr {
+  display: block
+}
+td.break {
+  float: left;
+  text-indent: 15px;
+  padding-right: 15px;
+}
+td.pad {
+	padding-right: 15px;
+}
 </style>
 
 </head>
@@ -23,21 +34,21 @@ label {
 			<form>
 				<table>
 					<tr th:each="currentCustomer, iterStat : ${customers}">
-						<td
+						<td class="pad"
 							th:text="${currentCustomer.fName} + ' ' + ${currentCustomer.lName} + ', Email: ' + ${currentCustomer.email} + ', Phone: ' + ${currentCustomer.phoneNum} + ', CC: ' + ${currentCustomer.creditCardNum} + ' || '"></td>
 						<!-- Couldn't get radio to work
 					<input type="radio" name="selectedCustomer" id="customer${iterStat.index}" value="${currentCustomer.id}">
 					<label for="customer${iterStat.index}" 
 					-->
-						<td th:each="vehicle : ${currentCustomer.vehicles}"
-							th:text="'Vehicle: ' + ${vehicle.color} + ' ' + ${vehicle.year} + ' ' + ${vehicle.make} + ' ' + ${vehicle.model}"></td>
-
 						<td><a class="sm_button"
 							th:href="@{/viewSpecificCustomer/{id}(id=${currentCustomer.id})}">View</a></td>
 						<td><a class="sm_button"
 							th:href="@{/editCustomer/{id}(id=${currentCustomer.id})}">Edit</a></td>
 						<td><a class="sm_button"
 							th:href="@{/deleteCustomer/{id}(id=${currentCustomer.id})}">Delete</a></td>
+							
+						<td class="break" th:each="vehicle : ${currentCustomer.vehicles}"
+							th:text="'Vehicle ' + ${currentCustomer.vehicles.indexOf(vehicle) + 1} + ': ' + ${vehicle.color} + ' ' + ${vehicle.year} + ' ' + ${vehicle.make} + ' ' + ${vehicle.model}"></td>
 					</tr>
 				</table>
 				<!-- Attempt at radio buttons - couldn't get value from selected radio
