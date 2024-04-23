@@ -4,6 +4,36 @@
 <meta charset="UTF-8">
 <title>Add New Vehicle</title>
 <link rel="stylesheet" href="/stylesheet.css">
+<script>
+	function validateForm() {
+		var make = document.vehicleForm.make.value
+		var model = document.vehicleForm.model.value
+		var year = document.vehicleForm.year.value
+		var color = document.vehicleForm.color.value
+		
+		if (make === "") {
+	        alert("Please enter the vehicle's make.");
+	        return false;
+	    }
+		if (model === "") {
+	        alert("Please enter the vehicle's model.");
+	        return false;
+	    }
+		if (!(/^\d{4}$/.test(year))) {
+	        alert("Please enter a valid vehicle's year.");
+	        return false;
+	    }
+		if (color === "") {
+	        alert("Please enter a valid vehicle's color.");
+	        return false;
+	    }
+		if (customer === "") {
+            alert("Please select a customer.");
+            return false;
+        }
+        return true;	
+	}
+</script>
 </head>
 <body class="center">
 	<div class="content">
