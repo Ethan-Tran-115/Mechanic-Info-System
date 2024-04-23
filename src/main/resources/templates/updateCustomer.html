@@ -36,10 +36,16 @@
 	}
 </script>	
 </head>
-<body>
+<body class="center">
     <div class="content">
-        <h2 class="center">Updating Existing Customer</h2>
+
+        <div class="image-container">
+            <img src="http://spencertramontina.com/wdv130/banners_webpage/images/Mechanic_Shop_Banner.jpg">
+            <h2 class="overlay-text">Updating Existing Customer</h2>
+        </div>
+        
         <form th:object="${updateCustomer}" th:action="@{/updateCustomer/{id}(id=${updateCustomer.id})}" method="post" name="updateCustomerForm" onsubmit="return validateForm()">
+
             <div class="innerContent">
                 <h3 class="center">Customer Information</h3>
                 <div class="center">
@@ -60,9 +66,9 @@
                 <h3 class="center">Vehicle Information</h3>
                 <div th:each="vehicle : ${updateCustomer.vehicles}">
 					<div class="center">
-						<p th:text="'Vehicle: ' + ${vehicle.color}+ ', ' + ${vehicle.year} + ' ' + ${vehicle.make} + ' ' + ${vehicle.model}"></p>
-						<a th:href="@{/editVehicle/{id}(id=${vehicle.id})}">Edit</a>
-						<a th:href="@{/deleteVehicle/{id}(id=${vehicle.id})}">Delete</a>
+						<p th:text="'Vehicle ' + ${updateCustomer.vehicles.indexOf(vehicle) + 1} + ': ' + ${vehicle.color}+ ', ' + ${vehicle.year} + ' ' + ${vehicle.make} + ' ' + ${vehicle.model}"></p>
+						<a class="sm_button" th:href="@{/editVehicle/{id}(id=${vehicle.id})}">Edit</a>
+						<a class="sm_button" th:href="@{/deleteVehicle/{id}(id=${vehicle.id})}">Delete</a>
 					</div>
 				 </div>
 					

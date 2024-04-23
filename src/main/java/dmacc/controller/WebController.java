@@ -19,9 +19,7 @@ import dmacc.repository.CustomerRepository;
 import dmacc.repository.VehicleRepository;
 
 /**
- * @author chumb - djackson16
- * CIS175 - Spring 2024
- * Apr 2, 2024
+ * @author chumb - djackson16 CIS175 - Spring 2024 Apr 2, 2024
  */
 
 @Controller
@@ -31,7 +29,7 @@ public class WebController {
 
 	@Autowired
 	private VehicleRepository vehicleRepository;
-	
+
 	@Autowired
 	private AppointmentRepository appointmentRepository;
 
@@ -43,7 +41,7 @@ public class WebController {
 		model.addAttribute("customers", customerRepository.findAll());
 		return "viewAllCustomers";
 	}
-	
+
 	@GetMapping("/viewSpecificCustomer/{id}")
 	public String viewCustomerVehicles(@PathVariable("id") long id, Model model) {
 		Customer c = customerRepository.findById(id).orElse(null);
@@ -65,7 +63,7 @@ public class WebController {
 	}
 
 	@PostMapping("/inputCustomer")
-	public String addNewCustomer(@ModelAttribute Customer c,@ModelAttribute Vehicle v, Model model) {
+	public String addNewCustomer(@ModelAttribute Customer c, @ModelAttribute Vehicle v, Model model) {
 		v.setCustomer(c);
 		List<Vehicle> tempVehicles = new ArrayList<>();
 		tempVehicles.add(v);
@@ -93,18 +91,30 @@ public class WebController {
 		customerRepository.delete(c);
 		return viewAllCustomers(model);
 	}
-	
+
+	@GetMapping("/viewAllVehicles")
+	public String viewAllVehicles(Model model) {
+		if (vehicleRepository.findAll().isEmpty()) {
+			return addNewVehicle(model);
+		}
+		model.addAttribute("vehicles", vehicleRepository.findAll());
+		return "viewAllVehicles";
+	}
+
 	@GetMapping("/inputVehicle")
 	public String addNewVehicle(Model model) {
 		Vehicle v = new Vehicle();
 		model.addAttribute("newVehicle", v);
-		return "input";
+		model.addAttribute("customers", customerRepository.findAll());
+		return "addVehicle";
 	}
 
 	@PostMapping("/inputVehicle")
 	public String addNewVehicle(@ModelAttribute Vehicle v, Model model) {
+		Customer selectedCustomer = customerRepository.findById(v.getCustomer().getId()).orElse(null);
+		v.setCustomer(selectedCustomer);
 		vehicleRepository.save(v);
-		return viewAllCustomers(model);
+		return viewAllVehicles(model);
 	}
 
 	@GetMapping("/editVehicle/{id}")
@@ -117,17 +127,20 @@ public class WebController {
 	@PostMapping("/updateVehicle/{id}")
 	public String reviseVehicle(Vehicle v, Model model) {
 		vehicleRepository.save(v);
-		Long custId = v.getCustomer().getId();
 		return "redirect:/index.html";
 	}
 
 	@GetMapping("/deleteVehicle/{id}")
 	public String deleteVehicle(@PathVariable("id") long id, Model model) {
 		Vehicle v = vehicleRepository.findById(id).orElse(null);
+		Customer c = v.getCustomer();
+		int vehicleListNum = c.getVehicles().indexOf(v);
+		c.getVehicles().remove(vehicleListNum);
+		v.setCustomer(null);
 		vehicleRepository.delete(v);
 		return viewAllCustomers(model);
 	}
-	
+
 	@GetMapping("/viewAllAppointments")
 	public String viewAllAppointments(Model model) {
 		if (appointmentRepository.findAll().isEmpty()) {
@@ -148,7 +161,7 @@ public class WebController {
 	@PostMapping("/inputAppointment")
 	public String addNewAppointment(@ModelAttribute Appointment a, Model model) {
 		Customer selectedCustomer = customerRepository.findById(a.getCustomer().getId()).orElse(null);
-	    a.setCustomer(selectedCustomer);
+		a.setCustomer(selectedCustomer);
 		appointmentRepository.save(a);
 		return viewAllAppointments(model);
 	}

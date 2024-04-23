@@ -28,9 +28,12 @@
 	}
 </script>
 </head>
-<body>
+<body class="center">
 	<div class="content">
-		<h2 class="center">Edit Appointment</h2>
+		<div class="image-container">
+            <img src="http://spencertramontina.com/wdv130/banners_webpage/images/Mechanic_Shop_Banner.jpg">
+            <h2 class="overlay-text">Edit Appointment</h2>
+        </div>
 		<form th:object="${newAppointment}"
 			th:action="@{/updateAppointment/{id}(id=${newAppointment.id})}"
 			method="post" name="appointmentForm" onsubmit="return validateForm()">
