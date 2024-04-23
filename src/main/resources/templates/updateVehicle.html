@@ -9,13 +9,40 @@
 		display: none;
 	}
 </style>
+<script>
+	function validateForm() {
+		var make = document.updateVehicleForm.make.value
+		var model = document.updateVehicleForm.model.value
+		var year = document.updateVehicleForm.year.value
+		var color = document.updateVehicleForm.color.value
+		
+		if (make === "") {
+	        alert("Please enter the vehicle's make.");
+	        return false;
+	    }
+		if (model === "") {
+	        alert("Please enter the vehicle's model.");
+	        return false;
+	    }
+		if (!(/^\d{4}$/.test(year))) {
+	        alert("Please enter a valid vehicle's year.");
+	        return false;
+	    }
+		if (color === "") {
+	        alert("Please enter a valid vehicle's color.");
+	        return false;
+	    }
+        
+        return true;	
+	}
+</script>
 </head>
 <!--Issue with, when updating either customer or vehicle, vehicle will not show up on the viewAllCustomers page, 
 	will show if you click the "view all customers" button-->
 <body>
 	<div class="content">
 		<h2 class="center">Updating Customer Vehicle Information</h2>
-		<form th:object="${updateVehicle}" th:action="@{/updateVehicle/{id}(id=${updateVehicle.id})}" method='post'>
+		<form th:object="${updateVehicle}" th:action="@{/updateVehicle/{id}(id=${updateVehicle.id})}" method="post" name="updateVehicleForm" onsubmit="return validateForm()">
 			<div class="innerContent">
 				<h3 class="center">Vehicle Information</h3>
 				<div th:object="${updateVehicle}">
