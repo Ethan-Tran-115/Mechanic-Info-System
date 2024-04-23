@@ -117,13 +117,16 @@ public class WebController {
 	@PostMapping("/updateVehicle/{id}")
 	public String reviseVehicle(Vehicle v, Model model) {
 		vehicleRepository.save(v);
-		Long custId = v.getCustomer().getId();
 		return "redirect:/index.html";
 	}
 
 	@GetMapping("/deleteVehicle/{id}")
 	public String deleteVehicle(@PathVariable("id") long id, Model model) {
 		Vehicle v = vehicleRepository.findById(id).orElse(null);
+		Customer c = v.getCustomer();
+		int vehicleListNum = c.getVehicles().indexOf(v);
+		c.getVehicles().remove(vehicleListNum);
+		v.setCustomer(null);
 		vehicleRepository.delete(v);
 		return viewAllCustomers(model);
 	}
