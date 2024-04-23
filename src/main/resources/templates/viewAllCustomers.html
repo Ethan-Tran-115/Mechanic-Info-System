@@ -33,7 +33,7 @@ td.pad {
 		<div class="innerContent">
 			<form>
 				<table>
-					<tr th:each="currentCustomer, iterStat : ${customers}">
+					<tr th:each="currentCustomer, iterStat : ${customers}" style="clear: both;">
 						<td class="pad"
 							th:text="${currentCustomer.fName} + ' ' + ${currentCustomer.lName} + ', Email: ' + ${currentCustomer.email} + ', Phone: ' + ${currentCustomer.phoneNum} + ', CC: ' + ${currentCustomer.creditCardNum} + ' || '"></td>
 						<!-- Couldn't get radio to work
