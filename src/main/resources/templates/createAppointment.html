@@ -29,9 +29,12 @@
 	}
 </script>
 </head>
-<body>
+<body class="center">
     <div class="content">
-        <h2 class="center">Creating Appointment</h2>
+		<div class="image-container">
+            <img src="http://spencertramontina.com/wdv130/banners_webpage/images/Mechanic_Shop_Banner.jpg">
+            <h2 class="center, overlay-text">Creating Appointment</h2>
+        </div>
         <form th:object="${newAppointment}" th:action="@{/inputAppointment}" method="post" name="appointmentForm" onsubmit="return validateForm()">
             <div class="innerContent">
                 <div class="center">
