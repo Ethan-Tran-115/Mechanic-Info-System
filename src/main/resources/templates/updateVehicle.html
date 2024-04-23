@@ -14,7 +14,11 @@
 	will show if you click the "view all customers" button-->
 <body>
 	<div class="content">
-		<h2 class="center">Updating Customer Vehicle Information</h2>
+		<div class="image-container">
+            <img src="images/Mechanic_Shop_Banner.jpg">
+            <h2 class="center, overlay-text">Updating Customer Vehicle Information</h2>
+        </div>
+		
 		<form th:object="${updateVehicle}" th:action="@{/updateVehicle/{id}(id=${updateVehicle.id})}" method='post'>
 			<div class="innerContent">
 				<h3 class="center">Vehicle Information</h3>

@@ -5,9 +5,13 @@
 <title>Add New Customer</title>
 <link rel="stylesheet" href="/stylesheet.css">
 </head>
-<body>
+<body class="center">
 	<div class="content">
-		<h2 class="center">Adding New Customer</h2>
+		<div class="image-container">
+            <img src="http://spencertramontina.com/wdv130/banners_webpage/images/Mechanic_Shop_Banner.jpg">
+            <h2 class="center, overlay-text">Adding New Customer</h2>
+        </div>
+		
 		<form th:object="${newCustomer}" th:action="@{/inputCustomer}"
 			method='post'>
 			<div class="innerContent">
