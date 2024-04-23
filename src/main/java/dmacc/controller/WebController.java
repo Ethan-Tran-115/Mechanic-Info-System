@@ -104,6 +104,17 @@ public class WebController {
 		model.addAttribute("vehicles", vehicleRepository.findAll());
 		return "viewAllVehicles";
 	}
+	
+	@GetMapping("/addVehicleToCustomer/{id}")
+	public String addVehicleToCustomer(@PathVariable("id") long id, Model model) {
+		List<Customer> tempCustomerList = new ArrayList<>();
+		Customer c = customerRepository.findById(id).orElse(null);
+		Vehicle v = new Vehicle();
+		tempCustomerList.add(c);
+		model.addAttribute("newVehicle", v);
+		model.addAttribute("customers", tempCustomerList);
+		return "addVehicle";
+	}
 
 	@GetMapping("/inputVehicle")
 	public String addNewVehicle(Model model) {
@@ -142,7 +153,7 @@ public class WebController {
 		c.getVehicles().remove(vehicleListNum);
 		v.setCustomer(null);
 		vehicleRepository.delete(v);
-		return viewAllCustomers(model);
+		return viewAllVehicles(model);
 	}
 
 	@GetMapping("/viewAllAppointments")
@@ -152,6 +163,17 @@ public class WebController {
 		}
 		model.addAttribute("appointment", appointmentRepository.findAll());
 		return "viewAllAppointments";
+	}
+	
+	@GetMapping("/addAppointmentToCustomer/{id}")
+	public String addAppointmentToCustomer(@PathVariable("id") long id, Model model) {
+		List<Customer> tempCustomerList = new ArrayList<>();
+		Customer c = customerRepository.findById(id).orElse(null);
+		Appointment a = new Appointment();
+		tempCustomerList.add(c);
+		model.addAttribute("newAppointment", a);
+		model.addAttribute("customers", tempCustomerList);
+		return "createAppointment";
 	}
 
 	@GetMapping("/inputAppointment")
