@@ -46,7 +46,6 @@
                 <div class="center">
                     <label for="customer">Select Customer: </label>
                     <select id="customer" name="customer" th:field="*{customer}">
-                        <option value="">Select a customer</option>
                         <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.fName + ' ' + customer.lName}"></option>
                     </select>
                 </div>

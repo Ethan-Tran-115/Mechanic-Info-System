@@ -77,6 +77,7 @@
 						<a></a>
 					</div>
 				 </div>
+				 <a th:href="@{/addVehicleToCustomer/{id}(id=${updateCustomer.id})}" class="button">Add New Vehicle</a><br>
 				 
 				  <h3 class="center">Appointment Information</h3>
                 <div th:each="appointment : ${updateCustomer.appointments}">
@@ -86,7 +87,8 @@
 						<a class="sm_button" th:href="@{/deleteAppointment/{id}(id=${appointment.id})}">Delete</a>
 					</div>
 				 </div>
-					
+				 <a th:href="@{/addAppointmentToCustomer/{id}(id=${updateCustomer.id})}" class="button">Add New Appointment</a><br>
+				 
 					<div class="center">
 						<br /> <input name="submit" type="submit" value="Submit" />
 					</div>
@@ -96,6 +98,7 @@
             <a href="/index.html" class="button">Back To Home</a>
             <a href="inputCustomer" class="button">Add New Customer</a>
             <a href="viewAllCustomers" class="button">View All Customers</a><br>
+            
         </div>
     </div>
 </body>
