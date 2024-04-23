@@ -64,8 +64,12 @@ public class WebController {
 
 	@PostMapping("/inputCustomer")
 	public String addNewCustomer(@ModelAttribute Customer c, @ModelAttribute Vehicle v, Model model) {
-		v.setCustomer(c);
+		if (v.getMake() == "") {
+			customerRepository.save(c);
+			return viewAllCustomers(model);
+		}
 		List<Vehicle> tempVehicles = new ArrayList<>();
+		v.setCustomer(c);
 		tempVehicles.add(v);
 		c.setVehicles(tempVehicles);
 		customerRepository.save(c);
@@ -182,7 +186,16 @@ public class WebController {
 	@GetMapping("/deleteAppointment/{id}")
 	public String deleteAppointment(@PathVariable("id") long id, Model model) {
 		Appointment a = appointmentRepository.findById(id).orElse(null);
+		if (a.getCustomer() == null) {
+			appointmentRepository.delete(a);
+			return viewAllAppointments(model);
+		}
+		Customer c = a.getCustomer();
+		int appointmentListNum = c.getAppointments().indexOf(a);
+		c.getAppointments().remove(appointmentListNum);
+		a.setCustomer(null);
 		appointmentRepository.delete(a);
 		return viewAllAppointments(model);
 	}
+	
 }
