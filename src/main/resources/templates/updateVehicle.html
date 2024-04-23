@@ -39,11 +39,11 @@
 </head>
 <!--Issue with, when updating either customer or vehicle, vehicle will not show up on the viewAllCustomers page, 
 	will show if you click the "view all customers" button-->
-<body>
+<body class="center">
 	<div class="content">
 		<div class="image-container">
-            <img src="images/Mechanic_Shop_Banner.jpg">
-            <h2 class="center, overlay-text">Updating Customer Vehicle Information</h2>
+            <img src="http://spencertramontina.com/wdv130/banners_webpage/images/Mechanic_Shop_Banner.jpg">
+            <h2 class="overlay-text">Updating Customer Vehicle Information</h2>
         </div>
 		
 		<form th:object="${updateVehicle}" th:action="@{/updateVehicle/{id}(id=${updateVehicle.id})}" method="post" name="updateVehicleForm" onsubmit="return validateForm()">

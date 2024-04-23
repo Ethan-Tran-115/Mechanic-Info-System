@@ -73,9 +73,11 @@
 						<a class="sm_button" th:href="@{/editVehicle/{id}(id=${vehicle.id})}">Edit</a>
 						<a class="sm_button" th:href="@{/deleteVehicle/{id}(id=${vehicle.id})}">Delete</a>
 					</div>
+					<div>
+						<a></a>
+					</div>
 				 </div>
 				 <a th:href="@{/addVehicleToCustomer/{id}(id=${updateCustomer.id})}" class="button">Add New Vehicle</a><br>
-				 
 				 
 				  <h3 class="center">Appointment Information</h3>
                 <div th:each="appointment : ${updateCustomer.appointments}">
