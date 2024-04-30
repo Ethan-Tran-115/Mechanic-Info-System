@@ -14,30 +14,46 @@ label {
 
 </head>
 <body class="center">
+	
 	<div class="content">
+		
 		<div class="image-container">
             <img src="http://spencertramontina.com/wdv130/banners_webpage/images/Mechanic_Shop_Banner.jpg">
             <h2 class="overlay-text">Viewing Customer</h2>
         </div>
+        
 		<div class="innerContent" th:object="${customer}">
+			
 			<h3>Customer Information</h3>
+			
 			<div
-				th:text="${customer.fName} + ' ' + ${customer.lName} + ', Email: ' + ${customer.email} + ', Phone: ' + ${customer.phoneNum} + ', CC: ' + ${customer.creditCardNum}"></div>
+				th:text="${customer.fName} + ' ' + ${customer.lName} + ', Email: ' + ${customer.email} + 
+				', Phone: (' + ${customer.phoneNum.substring(0, 3)} + ')-' + ${customer.phoneNum.substring(3, 6)} + '-' + ${customer.phoneNum.substring(6)} + 
+				', CC: ' + ${customer.creditCardNum}">
+			</div>
 				
 			<h3>Vehicle Information</h3>
+			
 			<div th:each="vehicle : ${customerVehicles}"
-				th:text="${vehicle.make} + ' ' + ${vehicle.model} + ' ' + ${vehicle.year} + ' ' + ${vehicle.color}"></div>
+				th:text="${vehicle.make} + ' ' + ${vehicle.model} + ' ' + ${vehicle.year} + ' ' + ${vehicle.color}">
+			</div>
 				
 			<h3>Appointments</h3>
+			
 			<div th:each="appointment : ${customerAppointments}"
-				th:text="${appointment.description} + ' ' + ${appointment.date}"></div>
+				th:text="'Appointment Date: ' + ${appointment.date} + ' || Reason for Visit: ' + ${appointment.description}">
+			</div>
+			
 		</div>
+		
 		<div class="center">
 			<a th:href="@{/editCustomer/{id}(id=${customer.id})}" class="button">Edit</a>
 			<a th:href="@{/deleteCustomer/{id}(id=${customer.id})}" class="button">Delete</a>
 			<a href="/index.html" class="button">Back To Home</a>
 			<a href="inputCustomer" class="button">Add New Customer</a><br>
 		</div>
+		
 	</div>
+	
 </body>
 </html>
