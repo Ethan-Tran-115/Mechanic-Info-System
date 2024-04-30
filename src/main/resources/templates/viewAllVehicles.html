@@ -6,36 +6,41 @@
 <link rel="stylesheet" href="/stylesheet.css">
 </head>
 <body class="center">
+	
 	<div class="content">
+		
 		<div class="image-container">
-			<img
-				src="http://spencertramontina.com/wdv130/banners_webpage/images/Mechanic_Shop_Banner.jpg">
+			<img src="http://spencertramontina.com/wdv130/banners_webpage/images/Mechanic_Shop_Banner.jpg">
 			<h2 class="overlay-text">List of Vehicles</h2>
 		</div>
+		
 		<div class="innerContent">
+			
 			<form>
 				<table>
 					<tr th:each="currentVehicle : ${vehicles}">
 
-						<td
-							th:text="'ID: ' + ${currentVehicle.id} + ' | Make: ' + ${currentVehicle.make} + ' | Model: ' + ${currentVehicle.model} +
+						<td th:text="'ID: ' + ${currentVehicle.id} + ' | Make: ' + ${currentVehicle.make} + ' | Model: ' + ${currentVehicle.model} +
 							 ' | Year: ' + ${currentVehicle.year} + ' | Color: ' + ${currentVehicle.color} + ' | Customer: '"></td>
 
-						<td
-							th:text="${currentVehicle.customer?.fName ?: ''} + ' ' + ${currentVehicle.customer?.lName ?: ''}"></td>
+						<td th:text="${currentVehicle.customer?.fName ?: ''} + ' ' + ${currentVehicle.customer?.lName ?: ''}"></td>
 
-						<td><a
+						<td><a class="sm_button"
 							th:href="@{/editVehicle/{id}(id=${currentVehicle.id})}">Edit</a></td>
-						<td><a
+						<td><a class="sm_button"
 							th:href="@{/deleteVehicle/{id}(id=${currentVehicle.id})}">Delete</a></td>
 					</tr>
 				</table>
 			</form>
+			
 		</div>
+		
 		<div class="center">
 			<a href="/index.html" class="button">Back To Home</a><br> <a
 				href="/inputVehicle" class="button">Add New Vehicle</a>
 		</div>
+		
 	</div>
+	
 </body>
 </html>
